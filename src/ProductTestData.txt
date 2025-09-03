@@ -1,0 +1,2 @@
+000001, Kelloggs Cereal, Chocolate cereal with fruits and nuts, 4.99
+000002, Whole Milk, Real cow's milk, 1.99
