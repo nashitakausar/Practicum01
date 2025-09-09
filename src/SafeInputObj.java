@@ -11,15 +11,23 @@ import java.util.Scanner;
  *
  * @author Tom Wulf Tom.Wulf@uc.edu
  */
-public class SafeInput 
+public class SafeInputObj
 {
-   /**
+    private final Scanner pipe;
+
+    public SafeInputObj()
+    {
+        this.pipe = new Scanner(System.in);
+    }
+
+
+    /**
     * Get a String which contains at least one character
     * @param pipe a Scanner opened to read from System.in
     * @param prompt prompt for the user
     * @return a String response that is not zero length
     */ 
-   public static String getNonZeroLenString(Scanner pipe, String prompt)
+   public String getNonZeroLenString(String prompt)
    {
        String retString = "";
        do
@@ -39,10 +47,10 @@ public class SafeInput
      * @param high - high end of inclusive range
      * @return - int value within the inclusive range
      */
-    public static int getRangedInt(Scanner pipe, String prompt, int low, int high)
+    public int getRangedInt(String prompt, int low, int high)
     {
        int retVal = 0;
-       String trash = "";
+       String trash;
        boolean done = false;
        
        do
@@ -77,7 +85,7 @@ public class SafeInput
      * @param prompt - input prompt msg should not include range info
      * @return - unconstrained int value 
      */
-    public static int getInt(Scanner pipe, String prompt)
+    public int getInt(String prompt)
     {
        int retVal = 0;
        String trash = "";
@@ -111,7 +119,7 @@ public class SafeInput
      * @param high - high value inclusive
      * @return  - double value within the specified inclusive range
      */
-    public static double getRangedDouble(Scanner pipe, String prompt, int low, int high)
+    public double getRangedDouble(String prompt, int low, int high)
     {
        double retVal = 0;
        String trash = "";
@@ -149,7 +157,7 @@ public class SafeInput
      * @param prompt - input prompt msg should not contain range info
      * @return  - an unconstrained double value 
      */
-    public static double getDouble(Scanner pipe, String prompt)
+    public double getDouble(String prompt)
     {
        double retVal = 0;
        String trash = "";
@@ -180,7 +188,7 @@ public class SafeInput
      * @param prompt -input prompt msg for user does not need [Y/N]
      * @return - true for yes false for no
      */
-    public static boolean getYNConfirm(Scanner pipe, String prompt)
+    public boolean getYNConfirm(String prompt)
     {
         boolean retVal = true;
         String response = "";
@@ -217,7 +225,7 @@ public class SafeInput
      * @return a String that matches the RegEx pattern supplied
      */
     
-    public static String getRegExString(Scanner pipe, String prompt, String regExPattern)
+    public String getRegExString(String prompt, String regExPattern)
     {
         String response = "";
         boolean gotAVal = false;

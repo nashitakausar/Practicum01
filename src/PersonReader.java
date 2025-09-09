@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PersonReader {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        SafeInputObj in = new SafeInputObj();
 
         //user chooses file
         JFileChooser chooser = new JFileChooser();
@@ -24,11 +25,12 @@ public class PersonReader {
         Path path = file.toPath();
 
 
-        if (!SafeInput.getYNConfirm(in, "Read file " + path.getFileName() + "?")) {
+        if (!in.getYNConfirm("Read file " + path.getFileName() + "?")) {
             System.out.println("Exiting without reading.");
             return;
         }
 
+        ArrayList<Person> people = new ArrayList<>();
         // print header
         System.out.println("ID#\tFirstname\tLastname\tTitle\tYOB");
 

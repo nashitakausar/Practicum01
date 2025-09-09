@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 import static java.nio.file.StandardOpenOption.CREATE;
 
-public class ProductWriter {
+public class ProductGenerator {
     public static void main(String[] args) {
-        ArrayList<String> products = new ArrayList<>();
-        Scanner in = new Scanner(System.in);
+        ArrayList<Product> products = new ArrayList<>();
+        SafeInputObj in = new SafeInputObj();
 
 
         File workingDirectory = new File(System.getProperty("user.dir"));
@@ -18,34 +18,28 @@ public class ProductWriter {
 
         boolean done = false;
 
-        String record;
-        String ID;
-        String name;
-        String description;
-        double cost;
 
         do {
-            ID = SafeInput.getNonZeroLenString(in, "Enter the product ID [6 digits]");
-            name = SafeInput.getNonZeroLenString(in, "Enter the product name");
-            description = SafeInput.getNonZeroLenString(in, "Enter the product description");
-            cost = SafeInput.getDouble(in, "Enter the product cost (double)");
+            String ID = in.getNonZeroLenString("Enter the product ID [6 digits]");
+            String name = in.getNonZeroLenString("Enter the product name");
+           String description = in.getNonZeroLenString("Enter the product description");
+           double cost = in.getDouble("Enter the product cost (double)");
 
 
-            record = ID + ", " + name + ", " + description + ", " + cost;
-            products.add(record);
-
-            done = SafeInput.getYNConfirm(in, "Do you want to stop entering products?");
+            products.add(new Product(name, description, ID, cost));
+            done = in.getYNConfirm("Stop entering products?");
         } while (!done);
 
 
-        for (String p : products)
+        for (Product p : products)
             System.out.println(p);
 
         try {
             OutputStream out = new BufferedOutputStream(Files.newOutputStream(file, CREATE));
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
 
-            for (String rec : products) {
+            for (Product p: products) {
+                String rec = p.toCSV();
                 writer.write(rec, 0, rec.length());
                 writer.newLine();
             }
