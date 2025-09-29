@@ -1,73 +1,35 @@
 @startuml
-skinparam backgroundColor white
-skinparam classAttributeIconSize 0
-
 class Person {
-  - firstName: String
-  - lastName: String
-  - ID: String
-  - title: String
-  - YOB: int
-  --
-  + Person(firstName:String, lastName:String, ID:String, title:String, YOB:int)
-  + Person(ID:String)
-  + getFirstName(): String
-  + setFirstName(String): void
-  + getLastName(): String
-  + setLastName(String): void
-  + getID(): String
-  + setID(String): void
-  + getTitle(): String
-  + setTitle(String): void
-  + getYOB(): int
-  + setYOB(int): void
-  + fullName(): String
-  + formalName(): String
-  + getAge(): String
-  + getAge(year:int): String
-  + toCSV(): String
-  + toJSON(): String
-  + toXML(): String
-  + toString(): String
-  + equals(Object): boolean
-  + hashCode(): int
+  - firstName : String
+  - lastName : String
+  - ID : String
+  - title : String
+  - YOB : int
+  + fullName() : String
+  + formalName() : String
+  + toCSV() : String
+  + toJSON() : String
+  + toXML() : String
 }
 
-class Product {
-  - name: String
-  - description: String
-  - ID: String
-  - cost: double
-  --
-  + Product(name:String, description:String, ID:String, cost:double)
-  + Product(ID:String)
-  + getName(): String
-  + setName(String): void
-  + getDescription(): String
-  + setDescription(String): void
-  + getID(): String
-  + setID(String): void
-  + getCost(): double
-  + setCost(double): void
-  + toCSV(): String
-  + toJSON(): String
-  + toXML(): String
-  + toString(): String
-  + equals(Object): boolean
-  + hashCode(): int
+class Worker {
+  - hourlyPayRate : double
+  + calculateWeeklyPay(hoursWorked: double) : double
+  + displayWeeklyPay(hoursWorked: double) : void
+  + toCSV() : String
+  + toJSON() : String
+  + toXML() : String
 }
 
-class SafeInputObj {
-  - pipe: Scanner
-  --
-  + SafeInputObj()
-  + SafeInputObj(scanner:Scanner)
-  + getNonZeroLenString(prompt:String): String
-  + getRangedInt(prompt:String, low:int, high:int): int
-  + getInt(prompt:String): int
-  + getRangedDouble(prompt:String, low:int, high:int): double
-  + getDouble(prompt:String): double
-  + getYNConfirm(prompt:String): boolean
-  + getRegExString(prompt:String, regExPattern:String): String
+class SalaryWorker {
+  - annualSalary : double
+  + calculateWeeklyPay(hoursWorked: double) : double
+  + displayWeeklyPay(hoursWorked: double) : void
+  + toCSV() : String
+  + toJSON() : String
+  + toXML() : String
 }
+
+Person <|-- Worker
+Worker <|-- SalaryWorker
 @enduml
