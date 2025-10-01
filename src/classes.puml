@@ -1,35 +1,17 @@
 @startuml
-class Person {
-  - firstName : String
-  - lastName : String
-  - ID : String
-  - title : String
-  - YOB : int
-  + fullName() : String
-  + formalName() : String
-  + toCSV() : String
-  + toJSON() : String
-  + toXML() : String
+interface Filter {
+  + accept(x: Object) : boolean
 }
 
-class Worker {
-  - hourlyPayRate : double
-  + calculateWeeklyPay(hoursWorked: double) : double
-  + displayWeeklyPay(hoursWorked: double) : void
-  + toCSV() : String
-  + toJSON() : String
-  + toXML() : String
+class ShortWordFilter {
+  + accept(x: Object) : boolean
 }
 
-class SalaryWorker {
-  - annualSalary : double
-  + calculateWeeklyPay(hoursWorked: double) : double
-  + displayWeeklyPay(hoursWorked: double) : void
-  + toCSV() : String
-  + toJSON() : String
-  + toXML() : String
+class BigRectangleFilter {
+  + accept(x: Object) : boolean
 }
 
-Person <|-- Worker
-Worker <|-- SalaryWorker
+ShortWordFilter ..|> Filter
+BigRectangleFilter ..|> Filter
 @enduml
+
